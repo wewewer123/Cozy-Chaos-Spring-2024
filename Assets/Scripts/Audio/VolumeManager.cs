@@ -2,7 +2,7 @@
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-namespace CrazyChaosSpring2024
+namespace CozyChaosSpring2024
 {
     public class VolumeManager : MonoBehaviour
 

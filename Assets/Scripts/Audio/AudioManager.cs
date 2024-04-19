@@ -7,7 +7,7 @@ using DG.Tweening;
 
 using Random = UnityEngine.Random;
 
-namespace CrazyChaosSpring2024
+namespace CozyChaosSpring2024
 {
     public class AudioManager : MonoBehaviour
     {
