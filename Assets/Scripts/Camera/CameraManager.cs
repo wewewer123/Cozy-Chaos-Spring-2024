@@ -17,12 +17,12 @@ namespace CozyChaosSpring2024
             if (Input.GetKeyDown(KeyCode.T))
             {
                 MoveCamera(0);
-                Zoom(true);
+                //Zoom(true);
             }
             if (Input.GetKeyDown(KeyCode.G))
             {
                 MoveCamera(1);
-                Zoom(false);
+                //Zoom(false);
             }
         }
         private void FixedUpdate()
