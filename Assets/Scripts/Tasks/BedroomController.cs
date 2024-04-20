@@ -9,6 +9,13 @@ namespace CozyChaosSpring2024
 {
     public class BedroomController : MonoBehaviour
     {
+        // objects needed for Ray casting - this was removed when we moved to the one scne thing but Im not sure why bc we still need to click?
+        public Transform mainCamera;
+
+        //objects for todolist
+        public TodoListScriptable todoList;
+        private Dictionary<string,bool> taskbools = new Dictionary<string,bool>{{"make bed",false}, {"organize closet",false}, {"fix rugs",false}};
+
         public static BedroomController i;
 
         /// <summary>
@@ -40,6 +47,12 @@ namespace CozyChaosSpring2024
             DontDestroyOnLoad(gameObject);
         }
 
+        void Start(){
+            mainCamera = Camera.main.transform;
+            // madeBed.GetComponent<MeshRenderer>().enabled = false;
+
+            todoList.todos = taskbools;
+        }
         // Update handles input
         void Update()
         {
@@ -77,11 +90,23 @@ namespace CozyChaosSpring2024
                     //    // SceneManager.LoadScene("Closet Sorting Minigame");
                     //    target.GetComponent<MeshRenderer>().enabled = false;
                     //    madeBed.GetComponent<MeshRenderer>().enabled = true;
+                    //      todoList.todos["make bed"] = true;
                     //}
                     //if(objectName == "smallRug" || objectName == "largeRug" ){
                     //    print("got here");
                     //    SceneManager.LoadScene(2);
                     //}
+                    // if(objectName == "door"){
+                    //     bool done = todoList.checkCompletion();
+                    //     if(done){
+                    //         print("you can leave now");
+                    //         // move to the end epilouge scene
+                    //     }
+                    //     else{
+                    //         print("make sure you have finished all tasks");
+                    //     }
+                    // }
+                    
                     
 
                 }
