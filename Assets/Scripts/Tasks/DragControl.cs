@@ -51,7 +51,8 @@ public class DragControl : MonoBehaviour
                     print(checkOrder());
                     if(checkOrder()){
                         //if the order is correct then close out to the main game
-                        SceneManager.LoadScene(0);
+                        //SceneManager.LoadScene(0);
+                        GetComponentInParent<Transform>().gameObject.SetActive(false);
                     }
                 }
             }
