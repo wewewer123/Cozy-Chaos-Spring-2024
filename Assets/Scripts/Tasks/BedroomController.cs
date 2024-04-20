@@ -13,11 +13,26 @@ namespace CozyChaosSpring2024
 
         public GameObject madeBed;
 
+        public TodoListScriptable todoList;
+        
+        private Dictionary<string,bool> taskbools = new Dictionary<string,bool>{{"make bed",false}, {"organize closet",false}, {"fix rugs",false}};
+
+        private bool firstLoad = true;
+
         // Start is called before the first frame update
         void Start()
         {
+            firstLoad = false;
             mainCamera = Camera.main.transform;
             madeBed.GetComponent<MeshRenderer>().enabled = false;
+
+            todoList.todos = taskbools;
+
+            if (firstLoad){
+                //initialize the todolist
+                todoList.todos = taskbools;
+            }
+
         }
 
         // Update is called once per frame
@@ -47,7 +62,7 @@ namespace CozyChaosSpring2024
                     //if we have hit an object with the ray
                     GameObject target = hit.collider.gameObject;
                     string objectName = target.name;
-                    print(objectName);
+                    // print(objectName);
                     if(objectName == "wardrobe"){
                         // SceneManager.LoadScene("Closet Sorting Minigame");
                         SceneManager.LoadScene(1);
@@ -57,10 +72,21 @@ namespace CozyChaosSpring2024
                         // SceneManager.LoadScene("Closet Sorting Minigame");
                         target.GetComponent<MeshRenderer>().enabled = false;
                         madeBed.GetComponent<MeshRenderer>().enabled = true;
+                        todoList.todos["make bed"] = true;
                     }
                     if(objectName == "smallRug" || objectName == "largeRug" ){
-                        print("got here");
                         SceneManager.LoadScene(2);
+                    }
+
+                    if(objectName == "door"){
+                        bool done = todoList.checkCompletion();
+                        if(done){
+                            print("you can leave now");
+                            // move to the end epilouge scene
+                        }
+                        else{
+                            print("make sure you have finished all tasks");
+                        }
                     }
                     
 
