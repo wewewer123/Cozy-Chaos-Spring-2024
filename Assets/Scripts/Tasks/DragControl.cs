@@ -9,6 +9,7 @@ public class DragControl : MonoBehaviour
 {
 
     public Transform mainCamera;
+    public TodoListScriptable todoList;
 
     //obects that need sorting
     public GameObject red;
@@ -52,7 +53,10 @@ public class DragControl : MonoBehaviour
                     if(checkOrder()){
                         //if the order is correct then close out to the main game
                         //SceneManager.LoadScene(0);
+                        todoList.todos["organize closet"] = true;
                         GetComponentInParent<Transform>().gameObject.SetActive(false);
+                        Camera.main.transform.SetPositionAndRotation(new Vector3(-5, 5 ,7), Quaternion.Euler(18,140,0));
+
                     }
                 }
             }

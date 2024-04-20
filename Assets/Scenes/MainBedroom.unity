@@ -1251,7 +1251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88be240645fac5a4682df9986fc9d25c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
   todoList: {fileID: 11400000, guid: 0242cb03ea80cf84ea8ca9f6fc98af00, type: 2}
   ClosetTask: {fileID: 1657151486}
 --- !u!1 &1657151486
@@ -1402,6 +1401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
+  todoList: {fileID: 11400000, guid: 0242cb03ea80cf84ea8ca9f6fc98af00, type: 2}
   red: {fileID: 596432567}
   blue: {fileID: 231897097}
   green: {fileID: 520505993}
