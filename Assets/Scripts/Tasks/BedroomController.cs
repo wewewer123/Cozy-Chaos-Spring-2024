@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using CozyChaosSpring2024;
+using Unity.Mathematics;
 
 
 namespace CozyChaosSpring2024
@@ -10,7 +11,7 @@ namespace CozyChaosSpring2024
     public class BedroomController : MonoBehaviour
     {
         // objects needed for Ray casting - this was removed when we moved to the one scne thing but Im not sure why bc we still need to click?
-        public Transform mainCamera;
+        // public Transform mainCamera;
 
         //objects for todolist
         public TodoListScriptable todoList;
@@ -48,7 +49,7 @@ namespace CozyChaosSpring2024
         }
 
         void Start(){
-            mainCamera = Camera.main.transform;
+            // mainCamera = Camera.main.transform;
             // madeBed.GetComponent<MeshRenderer>().enabled = false;
 
             todoList.todos = taskbools;
@@ -81,10 +82,12 @@ namespace CozyChaosSpring2024
                     GameObject target = hit.collider.gameObject;
                     string objectName = target.name;
                     print(objectName);
-                    //if(objectName == "wardrobe"){
+                    // if(objectName == "wardrobe"){
                     //    // SceneManager.LoadScene("Closet Sorting Minigame");
-                    //    SceneManager.LoadScene(1);
-                    //}
+                    //     // SceneManager.LoadScene(1);
+                    //     Camera.main.transform.SetPositionAndRotation(new Vector3(0,5,0), Quaternion.Euler(0,180,0));
+                    //     Camera.main.orthographicSize = 2;
+                    // }
                     //if(objectName == "bed"){
                     //    print("got here");
                     //    // SceneManager.LoadScene("Closet Sorting Minigame");
