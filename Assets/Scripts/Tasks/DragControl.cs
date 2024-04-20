@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using CrazyChaosSpring2024;
+using CozyChaosSpring2024;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class DragControl : MonoBehaviour
@@ -48,6 +49,10 @@ public class DragControl : MonoBehaviour
                 MouseDrag mDrag = hit.collider.GetComponent<MouseDrag>();
                 if(mDrag){
                     print(checkOrder());
+                    if(checkOrder()){
+                        //if the order is correct then close out to the main game
+                        SceneManager.LoadScene(0);
+                    }
                 }
             }
         }

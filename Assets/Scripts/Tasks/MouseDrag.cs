@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CrazyChaosSpring2024
+namespace CozyChaosSpring2024
 {
     public class MouseDrag : MonoBehaviour
     {
@@ -31,7 +31,7 @@ namespace CrazyChaosSpring2024
 
             // set the object to the new position
             transform.position = dragPos;
-            
+
         }
     }
 }
