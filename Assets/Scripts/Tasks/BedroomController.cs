@@ -19,6 +19,8 @@ namespace CozyChaosSpring2024
 
         public static BedroomController i;
 
+        public GameObject ClosetTask;
+
         /// <summary>
         /// Event called when a minigame must show up
         /// </summary>
@@ -82,7 +84,36 @@ namespace CozyChaosSpring2024
                     GameObject target = hit.collider.gameObject;
                     string objectName = target.name;
                     print(objectName);
-                    // if(objectName == "wardrobe"){
+
+                    if(objectName == "wardrobe"){
+                        //SceneManager.LoadScene("Closet Sorting Minigame");
+                        //SceneManager.LoadScene(1);
+
+                        ClosetTask.SetActive(true);
+                    }
+                    if(objectName == "bed"){
+                        print("got here");
+                        // SceneManager.LoadScene("Closet Sorting Minigame");
+                        target.GetComponent<MeshRenderer>().enabled = false;
+                        target.GetComponentInChildren<MeshRenderer>().enabled = true;
+                          todoList.todos["make bed"] = true;
+                    }
+                    if(objectName == "smallRug" || objectName == "largeRug" ){
+                        print("got here");
+                        SceneManager.LoadScene(2);
+                    }
+                     if(objectName == "door"){
+                         bool done = todoList.checkCompletion();
+                         if(done){
+                             print("you can leave now");
+                             // move to the end epilouge scene
+                         }
+                         else{
+                             print("make sure you have finished all tasks");
+                         }
+                     }
+
+                    //if(objectName == "wardrobe"){
                     //    // SceneManager.LoadScene("Closet Sorting Minigame");
                     //     // SceneManager.LoadScene(1);
                     //     Camera.main.transform.SetPositionAndRotation(new Vector3(0,5,0), Quaternion.Euler(0,180,0));
@@ -109,8 +140,8 @@ namespace CozyChaosSpring2024
                     //         print("make sure you have finished all tasks");
                     //     }
                     // }
-                    
-                    
+
+
 
                 }
             }

@@ -10,7 +10,7 @@ namespace CozyChaosSpring2024
         private bool isMoving;
         private int moveTarget;
         private bool wasZoomed = false;
-        private float zoomAmount = 60;
+        private float zoomAmount = 4;
 
         private void Update()
         {
@@ -49,7 +49,7 @@ namespace CozyChaosSpring2024
 
         private void SmoothZoom()
         {
-            this.GetComponent<Camera>().fieldOfView = Mathf.MoveTowards(this.GetComponent<Camera>().fieldOfView, zoomAmount, 1f);
+            this.GetComponent<Camera>().orthographicSize = Mathf.MoveTowards(this.GetComponent<Camera>().orthographicSize, zoomAmount, 0.1f);
         }
 
         public void MoveCamera(int roomNumber)
@@ -62,12 +62,12 @@ namespace CozyChaosSpring2024
         {
             if(isZoomed && !wasZoomed)
             {
-                zoomAmount = 30; //45
+                zoomAmount = 2;
                 wasZoomed = true;
             }
             if(!isZoomed && wasZoomed)
             {
-                zoomAmount = 60;
+                zoomAmount = 4;
                 wasZoomed = false;
             }
         }
