@@ -88,7 +88,8 @@ namespace CozyChaosSpring2024
                     if(objectName == "wardrobe"){
                         //SceneManager.LoadScene("Closet Sorting Minigame");
                         //SceneManager.LoadScene(1);
-
+                        Camera.main.transform.SetPositionAndRotation(new Vector3(0, 10 ,0), Quaternion.Euler(0,180,0));
+                        Camera.main.orthographicSize = 7;
                         ClosetTask.SetActive(true);
                     }
                     if(objectName == "bed"){
@@ -96,7 +97,7 @@ namespace CozyChaosSpring2024
                         // SceneManager.LoadScene("Closet Sorting Minigame");
                         target.GetComponent<MeshRenderer>().enabled = false;
                         target.GetComponentInChildren<MeshRenderer>().enabled = true;
-                          todoList.todos["make bed"] = true;
+                        todoList.todos["make bed"] = true;
                     }
                     if(objectName == "smallRug" || objectName == "largeRug" ){
                         print("got here");
