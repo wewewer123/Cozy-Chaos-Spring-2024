@@ -9,18 +9,38 @@ namespace CozyChaosSpring2024
 {
     public class BedroomController : MonoBehaviour
     {
-        public Transform mainCamera;
+        public static BedroomController i;
 
-        public GameObject madeBed;
+        /// <summary>
+        /// Event called when a minigame must show up
+        /// </summary>
+        public event System.Action<string> onMinigameStart;
+        /// <summary>
+        /// When a minigame is completed, this event is called
+        /// </summary>
+        public event System.Action<string> onMinigameComplete;
 
-        // Start is called before the first frame update
-        void Start()
+        // Awake is always called before any Start functions
+        void Awake()
         {
-            mainCamera = Camera.main.transform;
-            madeBed.GetComponent<MeshRenderer>().enabled = false;
+            // Check if instance already exists
+            if (i == null)
+            {
+                // If not, set instance to this
+                i = this;
+            }
+            // If instance already exists and it's not this:
+            else if (i != this)
+            {
+                // Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a Singleton.
+                Destroy(gameObject);
+            }
+
+            // Sets this to not be destroyed when reloading scene
+            DontDestroyOnLoad(gameObject);
         }
 
-        // Update is called once per frame
+        // Update handles input
         void Update()
         {
             //when we click down the mouse, and it hits a game object, start the drag
@@ -48,20 +68,20 @@ namespace CozyChaosSpring2024
                     GameObject target = hit.collider.gameObject;
                     string objectName = target.name;
                     print(objectName);
-                    if(objectName == "wardrobe"){
-                        // SceneManager.LoadScene("Closet Sorting Minigame");
-                        SceneManager.LoadScene(1);
-                    }
-                    if(objectName == "bed"){
-                        print("got here");
-                        // SceneManager.LoadScene("Closet Sorting Minigame");
-                        target.GetComponent<MeshRenderer>().enabled = false;
-                        madeBed.GetComponent<MeshRenderer>().enabled = true;
-                    }
-                    if(objectName == "smallRug" || objectName == "largeRug" ){
-                        print("got here");
-                        SceneManager.LoadScene(2);
-                    }
+                    //if(objectName == "wardrobe"){
+                    //    // SceneManager.LoadScene("Closet Sorting Minigame");
+                    //    SceneManager.LoadScene(1);
+                    //}
+                    //if(objectName == "bed"){
+                    //    print("got here");
+                    //    // SceneManager.LoadScene("Closet Sorting Minigame");
+                    //    target.GetComponent<MeshRenderer>().enabled = false;
+                    //    madeBed.GetComponent<MeshRenderer>().enabled = true;
+                    //}
+                    //if(objectName == "smallRug" || objectName == "largeRug" ){
+                    //    print("got here");
+                    //    SceneManager.LoadScene(2);
+                    //}
                     
 
                 }
