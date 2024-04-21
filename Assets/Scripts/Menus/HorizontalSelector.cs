@@ -19,6 +19,8 @@ namespace CozyChaosSpring2024
             _text = transform.Find("Value").GetComponent<TextMeshProUGUI>();
             transform.Find("Left").GetComponent<Button>().onClick.AddListener(OnLeftClicked);
             transform.Find("Right").GetComponent<Button>().onClick.AddListener(OnRightClick);
+            _index = PlayerPrefs.GetInt("TextSize", 0);
+            ApplyChanges();
         }
 
         private void OnLeftClicked()
@@ -44,6 +46,7 @@ namespace CozyChaosSpring2024
         private void ApplyChanges()
         {
             _text.text = options[_index];
+            PlayerPrefs.SetInt("TextSize", _index);
             TextSizeManager.size = (TextSizeManager.TextSizes)_index;
             if (onOptionsChange != null)
                 onOptionsChange();
