@@ -48,21 +48,21 @@ namespace CozyChaosSpring2024
         // Awake is always called before any Start functions
         void Awake()
         {
-            // Check if instance already exists
-            if (i == null)
-            {
-                // If not, set instance to this
-                i = this;
-            }
-            // If instance already exists and it's not this:
-            else if (i != this)
-            {
-                // Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a Singleton.
-                Destroy(gameObject);
-            }
+            // // Check if instance already exists
+            // if (i == null)
+            // {
+            //     // If not, set instance to this
+            //     i = this;
+            // }
+            // // If instance already exists and it's not this:
+            // else if (i != this)
+            // {
+            //     // Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a Singleton.
+            //     // Destroy(gameObject);
+            // }
 
-            // Sets this to not be destroyed when reloading scene
-            DontDestroyOnLoad(gameObject);
+            // // Sets this to not be destroyed when reloading scene
+            // DontDestroyOnLoad(gameObject);
         }
 
         void Start(){
@@ -178,6 +178,7 @@ namespace CozyChaosSpring2024
                          if(done){
                              print("you can leave now");
                              // move to the end epilouge scene
+                            SceneManager.LoadScene(3);
                          }
                          else{
                              print("make sure you have finished all tasks");
