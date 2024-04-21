@@ -161,7 +161,7 @@ namespace CozyChaosSpring2024
 
                         //if all curtains are open then say the task is complete
                         if(curtains.Contains(false) == false){
-                            mainLight.GetComponent<Light>().intensity = 40;
+                            mainLight.GetComponent<Light>().intensity = 30;
                             todoList.todos["open curtains"] = true;
                         }
                         
