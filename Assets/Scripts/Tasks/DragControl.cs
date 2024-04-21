@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class DragControl : MonoBehaviour
 {
+    [SerializeField] float[] _relativeHeight;
+    public float[] relativeHeight { get => _relativeHeight; }
 
     public Transform mainCamera;
     public TodoListScriptable todoList;
@@ -14,21 +16,17 @@ public class DragControl : MonoBehaviour
     public GameObject closetTask;
 
     //obects that need sorting
-    public GameObject heartShirt;
-    public GameObject tealShorts;
-    public GameObject jeans;
-    public GameObject purplepants;
-    public GameObject sunshirt;
-    public GameObject frogshirt;
-    public GameObject snowmanshirt;
-    public GameObject weweshirt;
-    public GameObject pinkshoes;
-    public GameObject brownshoes;
-    public GameObject flipflops;
-    public GameObject pinkshorts;
-    public GameObject redshorts;
+    [SerializeField] List<GameObject> shirts;
+    [SerializeField] List<GameObject> pants;
 
-
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        foreach(float h in relativeHeight)
+        {
+            Gizmos.DrawSphere(transform.parent.position + Vector3.up * h, 0.5f);
+        }
+    }
 
 
     // Start is called before the first frame update
@@ -63,63 +61,31 @@ public class DragControl : MonoBehaviour
                 //if we have hit an object with the ray
                 MouseDrag mDrag = hit.collider.GetComponent<MouseDrag>();
                 if(mDrag){
-                    print(checkOrder());
-                    if(checkOrder()){
-                        //if the order is correct then close out to the main game
-                        //SceneManager.LoadScene(0);
-                        todoList.todos["organize closet"] = true;
-                        Camera.main.transform.SetPositionAndRotation(new Vector3(-5, 5 ,7), Quaternion.Euler(18,140,0));
-                        closetTask.gameObject.SetActive(false);
-
-                    }
+                    
                 }
             }
+            Invoke(nameof(checkOrder), Time.deltaTime * 2);
         }
     }
 
-    private bool checkOrder(){
-        // add the positions in the right order
-
-        //correct order (in X direction)
-        // List<GameObject> correct_order = new List<GameObject> {heartShirt,tealShorts,jeans}; 
-        // // check if that list is ordered
-        // float previous = -10;
-        // foreach (var obj in correct_order){
-        //     var pos = obj.GetComponent<Transform>().position.x;
-        //     if (pos > previous){
-        //         previous = pos;
-        //     }
-        //     else{
-        //         return false; // if the order is not correct then return false
-        //     }
-        // }
-
-        // justthe vertical direction
-        List<GameObject> topShirts = new List<GameObject> {heartShirt,sunshirt,snowmanshirt,weweshirt,frogshirt}; 
-        List<GameObject> bottomPants = new List<GameObject> {tealShorts,jeans,purplepants,pinkshorts,redshorts}; 
-
-        float lowestShirt = 50;
-        foreach(var shirt in topShirts){
-            if (lowestShirt > shirt.GetComponent<Transform>().position.y){
-                lowestShirt = shirt.GetComponent<Transform>().position.y;
+    private void checkOrder(){
+        foreach(GameObject shirt in shirts){
+            if (shirt.transform.localPosition.y != relativeHeight[1]){
+                print("Incorrect shirt");
+                return;
             }
         }
-        float highestPants = -10;
-        foreach(var pants in bottomPants){
-            if (highestPants < pants.GetComponent<Transform>().position.y){
-                highestPants = pants.GetComponent<Transform>().position.y;
+        foreach(GameObject pants in pants){
+            if (pants.transform.localPosition.y != relativeHeight[0])
+            {
+                print("Incorrect pants");
+                return;
             }
         }
-        
-        if (lowestShirt > highestPants){
-            return true;
-        }
-        else{
-            return false;
-        }
-        
 
-        // return true;
+        todoList.todos["organize closet"] = true;
+        Camera.main.transform.SetPositionAndRotation(new Vector3(-5, 5, 7), Quaternion.Euler(18, 140, 0));
+        closetTask.gameObject.SetActive(false);
     }
 }
 
