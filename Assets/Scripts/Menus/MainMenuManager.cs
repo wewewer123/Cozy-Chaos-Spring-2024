@@ -21,7 +21,9 @@ namespace CrazyChaosSpring2024
 
         public void OnPlay()
         {
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+            // SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+            var sceneTransition = FindObjectOfType<SceneTransition>();
+            sceneTransition.PlayTransition(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
         public void OnOptionsClicked()
