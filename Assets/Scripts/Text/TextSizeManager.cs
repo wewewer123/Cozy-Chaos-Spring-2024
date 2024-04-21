@@ -75,17 +75,20 @@ namespace CozyChaosSpring2024
             }
             else
             {
-                switch (size)
+                if (SceneManager.GetSceneByName("EndScene") == SceneManager.GetActiveScene() && SceneManager.GetSceneByName("MainBedroom") == SceneManager.GetActiveScene())
                 {
-                    case TextSizes.regular:
-                        text.fontSize = 30;
-                        break;
-                    case TextSizes.large:
-                        text.fontSize = 34;
-                        break;
-                    case TextSizes.extraLarge:
-                        text.fontSize = 42;
-                        break;
+                    switch (size)
+                    {
+                        case TextSizes.regular:
+                            text.fontSize = 30;
+                            break;
+                        case TextSizes.large:
+                            text.fontSize = 34;
+                            break;
+                        case TextSizes.extraLarge:
+                            text.fontSize = 42;
+                            break;
+                    }
                 }
             }
         }
