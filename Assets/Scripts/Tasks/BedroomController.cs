@@ -81,13 +81,14 @@ namespace CozyChaosSpring2024
             //when we click down the mouse, and it hits a game object, start the drag
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit = new RaycastHit();
+            Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
             if (Physics.Raycast(ray, out hit, 1000))
             {
                 //if we have hit an object with the ray
-                MouseDrag mDrag = hit.collider.GetComponent<MouseDrag>();
-                if (mDrag)
+                if(hit.collider.gameObject.activeSelf)
                 {
                     Cursor.SetCursor(hoverCursor, Vector2.zero, CursorMode.Auto);
+                    Debug.Log("Hit good");
                 }
                 else
                 {
