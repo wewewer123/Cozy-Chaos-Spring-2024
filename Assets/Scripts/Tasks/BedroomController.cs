@@ -38,6 +38,9 @@ namespace CozyChaosSpring2024
 
         public BedroomAudio audioManager;
 
+        [SerializeField] Texture2D cursorDefault;
+        [SerializeField] Texture2D hoverCursor;
+
         /// <summary>
         /// Event called when a minigame must show up
         /// </summary>
@@ -76,9 +79,27 @@ namespace CozyChaosSpring2024
         void Update()
         {
             //when we click down the mouse, and it hits a game object, start the drag
-            if(Input.GetMouseButtonDown(0)){
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit = new RaycastHit();
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit = new RaycastHit();
+            Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
+            if (Physics.Raycast(ray, out hit, 1000))
+            {
+                //if we have hit an object with the ray
+                if(hit.collider.gameObject.activeSelf)
+                {
+                    Cursor.SetCursor(hoverCursor, Vector2.zero, CursorMode.Auto);
+                    Debug.Log("Hit good");
+                }
+                else
+                {
+                    Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
+                }
+            }
+            else
+            {
+                Cursor.SetCursor(cursorDefault, Vector2.zero, CursorMode.Auto);
+            }
+            if (Input.GetMouseButtonDown(0)){
                 if(Physics.Raycast(ray, out hit, 1000)){
                     //if we have hit an object with the ray
                     MouseDrag mDrag = hit.collider.GetComponent<MouseDrag>();
@@ -89,12 +110,10 @@ namespace CozyChaosSpring2024
                         // print("I have hit a not draggable object");
                     }
                 }
-
+                
             }
             if (Input.GetMouseButtonUp(0)){
                 // if you want to do anything on let go
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit = new RaycastHit();
                 if(Physics.Raycast(ray, out hit, 1000)){
                     //if we have hit an object with the ray
                     GameObject target = hit.collider.gameObject;
