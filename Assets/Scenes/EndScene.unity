@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 1361103584}
   - component: {fileID: 1361103586}
   - component: {fileID: 1361103585}
+  - component: {fileID: 1361103587}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -443,13 +444,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Opening the door, you are greeted by the warm sun and the smell of spring.
-
-    You
-    see flowers blosson and a bee buzzing around. You feel ready to start the new
-    day.
-
-'
+  m_text: "Opening the door,\nyou are greeted by the warm sun\nand the smell of spring.\nYou
+    see flowers blossom and a bee buzzing around. \nYou feel ready to start the new
+    day.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2437b19ea2b614d4bb93ead43068921d, type: 2}
   m_sharedMaterial: {fileID: 4031137472996983650, guid: 2437b19ea2b614d4bb93ead43068921d, type: 2}
@@ -512,7 +509,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 55.882492, z: -824.94824, w: -110.49487}
+  m_margin: {x: -47.650055, y: 55.882492, z: -884.0343, w: -110.49487}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -526,6 +523,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1361103583}
   m_CullTransparentMesh: 1
+--- !u!114 &1361103587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361103583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ead034b34b42e40acac9f8ee282f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playOnAwake: 1
+  textSpeed: 15
+  time: -1
 --- !u!1 &1918065443
 GameObject:
   m_ObjectHideFlags: 0
