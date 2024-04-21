@@ -123,8 +123,11 @@ namespace CozyChaosSpring2024
                         // SceneManager.LoadScene(2);
                     }
 
-                    if(objectName == "curtain1a" || objectName == "curtain1b" || objectName == "curtain2a" || objectName == "curtain2b"){
+                    if(objectName == "curtain1a" || objectName == "curtain1b" || objectName == "curtain2a" || objectName == "curtain2b")
+                    {
 
+                        const string curtainAudioClipName = "Curtains";
+                        AudioManager.i.PlayAudioByName(curtainAudioClipName);
                         if(objectName == "curtain1a"){
                             target.transform.localScale = new Vector3(4.627653f,2.5f,4.627653f);
                             target.transform.position = new Vector3(target.transform.position.x,target.transform.position.y,1.5f);
