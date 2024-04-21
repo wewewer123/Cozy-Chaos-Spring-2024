@@ -36,6 +36,8 @@ namespace CozyChaosSpring2024
 
         private int waterClicks = 0;
 
+        public BedroomAudio audioManager;
+
         /// <summary>
         /// Event called when a minigame must show up
         /// </summary>
@@ -163,14 +165,23 @@ namespace CozyChaosSpring2024
                     }
 
                     if(objectName == "WateringCan"){
-                        waterClicks += 1;
-                        if (waterClicks == 3){
-                            todoList.todos["water plants"] = true;
+                        // AudioSource.Play();
+                        if (waterClicks<=2){
+                            audioManager.playAudio(waterClicks);
+                            if (waterClicks == 2){
+                                todoList.todos["water plants"] = true;
+                            }
                         }
                         else if(waterClicks > 3){
                             print("You have failed the water Task");
                             // do whatever we want on the failure of the watering task
                         }
+                        waterClicks += 1;
+                    }
+
+                    if(objectName == "Plant"){
+                        // play the correct answer to the plant watering
+                        audioManager.playAudio(2);
                     }
 
                     if(objectName == "Door" || objectName == "DoorClosed"){
