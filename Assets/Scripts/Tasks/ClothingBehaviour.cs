@@ -46,6 +46,7 @@ namespace CozyChaosSpring2024
 
         void OnDrop()
         {
+            AudioManager.i.PlayAudioByName("ClothesMoving");
             // Check if it's in between the bars
             if(Mathf.Abs( transform.localPosition.x) > 2.8f)
             {
