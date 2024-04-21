@@ -25,7 +25,7 @@ namespace CozyChaosSpring2024
         }
 
         private void updateTodoList(){
-            text.text = "";
+            text.text = "Todo List";
             foreach (var task in todos.todos.Keys){
                 // print(task);
                 if (todos.todos[task] == true){

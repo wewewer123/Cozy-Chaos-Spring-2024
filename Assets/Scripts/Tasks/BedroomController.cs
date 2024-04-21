@@ -24,6 +24,10 @@ namespace CozyChaosSpring2024
         public GameObject openDoor;
         public GameObject closeDoor;
         private List<bool> curtains = new List<bool>(){false,false,false,false};
+
+        public Light light1;
+        public Light light2;
+        public Light mainLight;
         public static BedroomController i;
 
         public GameObject ClosetTask;
@@ -99,7 +103,7 @@ namespace CozyChaosSpring2024
                         //SceneManager.LoadScene("Closet Sorting Minigame");
                         //SceneManager.LoadScene(1);
                         Camera.main.transform.SetPositionAndRotation(new Vector3(0, 10 ,0), Quaternion.Euler(0,180,0));
-                        Camera.main.orthographicSize = 7;
+                        // Camera.main.orthographicSize = 7;
                         ClosetTask.SetActive(true);
                     }
                     
@@ -141,15 +145,18 @@ namespace CozyChaosSpring2024
                         }
                         // if curtain 1 a and b then turn that window light on
                         if(curtains[0] && curtains[1]){
-                            //turnon light                       
+                            //turnon light
+                            light1.GetComponent<Light>().enabled = true;                       
                         }
                         // if curtian 2 a and 2b then turn that light on
                         if(curtains[2] && curtains[3]){
-                            //turnon light                       
+                            //turnon light  
+                            light2.GetComponent<Light>().enabled = true;                       
                         }
 
                         //if all curtains are open then say the task is complete
                         if(curtains.Contains(false) == false){
+                            mainLight.GetComponent<Light>().intensity = 40;
                             todoList.todos["open curtains"] = true;
                         }
                         
