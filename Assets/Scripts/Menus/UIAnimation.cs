@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using CrazyChaosSpring2024;
+using CozyChaosSpring2024;
 using DG.Tweening;
 using UnityEngine;
 

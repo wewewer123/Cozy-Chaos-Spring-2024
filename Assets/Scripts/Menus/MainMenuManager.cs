@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace CrazyChaosSpring2024
+namespace CozyChaosSpring2024
 {
     public class MainMenuManager : MonoBehaviour
     {
