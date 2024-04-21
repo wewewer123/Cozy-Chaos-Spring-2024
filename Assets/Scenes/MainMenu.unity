@@ -5229,69 +5229,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8697214203526137112, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
-      propertyPath: Loop
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8697214203526137113, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
       propertyPath: m_Name
       value: AudioManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 8697214203526137114, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
-      propertyPath: sfxAudioClips.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8697214203526137114, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
-      propertyPath: musicAudioClips.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8697214203526137114, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
-      propertyPath: sfxAudioClips.Array.data[6].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 1b0271b585998064797af540127fe9b9, type: 3}
-    - target: {fileID: 8697214203526137114, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
-      propertyPath: sfxAudioClips.Array.data[6].name
-      value: UIHover
-      objectReference: {fileID: 0}
-    - target: {fileID: 8697214203526137114, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
-      propertyPath: sfxAudioClips.Array.data[6].type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8697214203526137114, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
-      propertyPath: sfxAudioClips.Array.data[7].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 2782e3967a9251e49aa1614eac95bfe2, type: 3}
-    - target: {fileID: 8697214203526137114, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
-      propertyPath: sfxAudioClips.Array.data[7].name
-      value: UIClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 8697214203526137114, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
-      propertyPath: sfxAudioClips.Array.data[7].type
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8697214203526137114, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
-      propertyPath: musicAudioClips.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 501b5152585434d4ba8dcea2df653e8c, type: 3}
-    - target: {fileID: 8697214203526137114, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
-      propertyPath: musicAudioClips.Array.data[0].name
-      value: MainMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 8697214203526137114, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
-      propertyPath: musicAudioClips.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: de20f513567bdbb4ebbade769448f996, type: 3}
-    - target: {fileID: 8697214203526137114, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
-      propertyPath: musicAudioClips.Array.data[1].name
-      value: Cozy
-      objectReference: {fileID: 0}
-    - target: {fileID: 8697214203526137114, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
-      propertyPath: musicAudioClips.Array.data[1].type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8697214203526137115, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
-      propertyPath: Loop
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
