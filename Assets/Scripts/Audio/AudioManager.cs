@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,177 +16,191 @@ namespace CozyChaosSpring2024
     // public SfxClip[] sfxClips;
 
 
-    [SerializeField] private AudioSource track1;
-    [SerializeField] private AudioSource track2;
+        [SerializeField] private AudioSource track1;
+        [SerializeField] private AudioSource track2;
+        [SerializeField] private AudioSource uiAudioSource;
 
-    [SerializeField] private M_AudioClip[] audioClips;
+        [SerializeField] private M_AudioClip[] audioClips;
 
-    [SerializeField] private AudioMixer masterMixer;
-    [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource sfxSource;
-    [SerializeField] private float musicFadeTime = 5.0f;
+        [SerializeField] private AudioMixer masterMixer;
+        [SerializeField] private float musicFadeTime = 5.0f;
 
-    private List<M_AudioClip> menuClips;
-    private List<M_AudioClip> levelClips;
+        private List<M_AudioClip> _menuClips;
+        private List<M_AudioClip> _levelClips;
 
-    private List<AudioSource> tracks;
-    private int _currentTrackIndex;
-    private Coroutine _currentTriggerCoroutine;
-    private M_AudioClip _lastPlayedClip;
-    private Scene LastScene;
+        private List<AudioSource> _tracks;
+        private int _currentTrackIndex;
+        private Coroutine _currentTriggerCoroutine;
+        private M_AudioClip _lastPlayedClip;
+        private Scene _lastScene;
 
-    private void Awake()
-    {
-        if (i == null)
+        private Dictionary<string, M_AudioClip> _nameToClipMapping;
+
+        private void Awake()
         {
-            i = this;
-            DontDestroyOnLoad(this);
-        }
-        else
-        {
-            Destroy(this);
-        }
-        tracks = new List<AudioSource>() {
-            track1,
-            track2
-        };
-        _currentTrackIndex = 0;
-        LoadVolumeSettings();
-        SplitClips();
-        PlayDefaultMusic();
-    }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if(scene != LastScene)
-        {
-            if (_currentTriggerCoroutine != null)
+            if (i == null)
             {
-                StopCoroutine(_currentTriggerCoroutine);
+                i = this;
+                DontDestroyOnLoad(this);
             }
+            else
+            {
+                Destroy(this);
+            }
+            _tracks = new List<AudioSource>() {
+                track1,
+                track2
+            };
+            _currentTrackIndex = 0;
+            LoadVolumeSettings();
+            SplitClips();
             PlayDefaultMusic();
-            LastScene = scene;
         }
-    }
-    private void LoadVolumeSettings()
-    {
-        var masterVolume = PlayerPrefs.GetFloat(VolumeManager.MasterVolumeKey, 1.0f);
-        var musicVolume = PlayerPrefs.GetFloat(VolumeManager.MusicVolumeKey, 0.6f);
-        var sfxVolume = PlayerPrefs.GetFloat(VolumeManager.SfxVolumeKey, 0.8f);
 
-        masterMixer.SetFloat(VolumeManager.MasterVolumeKey, VolumeManager.ConvertToDecibel(masterVolume));
-        masterMixer.SetFloat(VolumeManager.MusicVolumeKey, VolumeManager.ConvertToDecibel(musicVolume));
-        masterMixer.SetFloat(VolumeManager.SfxVolumeKey, VolumeManager.ConvertToDecibel(sfxVolume));
-    }
-
-    
-
-    private void PlayDefaultMusic()
-    {
-        const int mainMenuIndex = 0;
-        var index = SceneManager.GetActiveScene().buildIndex;
-        if (index == mainMenuIndex)
+        private void OnEnable()
         {
-            foreach (var track in tracks)
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if(scene != _lastScene)
             {
-                track.Stop();
-            }
-            tracks[_currentTrackIndex].clip = GetClipByName("MainMenu");
-            tracks[_currentTrackIndex].Play();
-        }
-        else if (index == SceneManager.sceneCount - 1)
-        {
-            var clip = GetClipByName("Outro");
-            FadeBetweenTrack(clip);
-        }
-        else
-        {
-            var clip = GetRandomLevelClip();
-            _currentTriggerCoroutine = StartCoroutine(TriggerFadeOnMusicEnd(clip.length));
-            FadeBetweenTrack(clip);
-        }
-    }
-
-    private void SplitClips()
-    {
-        menuClips = new List<M_AudioClip>();
-        levelClips = new List<M_AudioClip>();
-        foreach (var clip in audioClips)
-        {
-            switch (clip.type)
-            {
-                case ClipType.Menu:
-                    menuClips.Add(clip);
-                    break;
-                case ClipType.Level:
-                    levelClips.Add(clip);
-                    break;
-                default:
-                    break;
+                if (_currentTriggerCoroutine != null)
+                {
+                    StopCoroutine(_currentTriggerCoroutine);
+                }
+                PlayDefaultMusic();
+                _lastScene = scene;
             }
         }
-    }
-
-    private AudioClip GetClipByName(string name)
-    {
-        foreach (var mClip in audioClips)
+        private void LoadVolumeSettings()
         {
-            if (mClip.name == name)
+            var masterVolume = PlayerPrefs.GetFloat(VolumeManager.MasterVolumeKey, 1.0f);
+            var musicVolume = PlayerPrefs.GetFloat(VolumeManager.MusicVolumeKey, 0.6f);
+            var sfxVolume = PlayerPrefs.GetFloat(VolumeManager.SfxVolumeKey, 0.8f);
+
+            masterMixer.SetFloat(VolumeManager.MasterVolumeKey, VolumeManager.ConvertToDecibel(masterVolume));
+            masterMixer.SetFloat(VolumeManager.MusicVolumeKey, VolumeManager.ConvertToDecibel(musicVolume));
+            masterMixer.SetFloat(VolumeManager.SfxVolumeKey, VolumeManager.ConvertToDecibel(sfxVolume));
+        }
+
+        
+
+        private void PlayDefaultMusic()
+        {
+            const int mainMenuIndex = 0;
+            var index = SceneManager.GetActiveScene().buildIndex;
+            if (index == mainMenuIndex)
             {
-                return mClip.clip;
+                foreach (var track in _tracks)
+                {
+                    track.Stop();
+                }
+                _tracks[_currentTrackIndex].clip = GetClipByName("MainMenu");
+                _tracks[_currentTrackIndex].Play();
+            }
+            else if (index == SceneManager.sceneCount - 1)
+            {
+                var clip = GetClipByName("Outro");
+                FadeBetweenTrack(clip);
+            }
+            else
+            {
+                var clip = GetRandomLevelClip();
+                _currentTriggerCoroutine = StartCoroutine(TriggerFadeOnMusicEnd(clip.length));
+                FadeBetweenTrack(clip);
             }
         }
-        return null;
-    }
 
-    private AudioClip GetRandomLevelClip()
-    {
-
-        var index = Random.Range(0, levelClips.Count);
-        var temp = levelClips[index];
-        levelClips.RemoveAt(index);
-        if (_lastPlayedClip != null)
+        private void SplitClips()
         {
-            levelClips.Add(_lastPlayedClip);
+            _menuClips = new List<M_AudioClip>();
+            _levelClips = new List<M_AudioClip>();
+            _nameToClipMapping = new Dictionary<string, M_AudioClip>();
+            foreach (var clip in audioClips)
+            {
+                _nameToClipMapping.Add(clip.name, clip);
+                switch (clip.type)
+                {
+                    case ClipType.Menu:
+                        _menuClips.Add(clip);
+                        break;
+                    case ClipType.Level:
+                        _levelClips.Add(clip);
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
-        _lastPlayedClip = temp;
-        return temp.clip;
-    }
 
-    private void FadeBetweenTrack(AudioClip clip)
-    {
-        var currentTrack = tracks[_currentTrackIndex];
-        _currentTrackIndex = (_currentTrackIndex + 1) % tracks.Count;
-        var nextTrack = tracks[_currentTrackIndex];
-        nextTrack.clip = clip;
-        FadeMusic(currentTrack, nextTrack);
-    }
+        private AudioClip GetClipByName(string name) =>
+            _nameToClipMapping.ContainsKey(name) ? _nameToClipMapping[name].clip : null;
+        
+        private AudioClip GetRandomLevelClip()
+        {
 
-    private void FadeMusic(AudioSource fromTrack, AudioSource toTrack)
-    {
-        toTrack.Play();
-        toTrack.volume = 0;
-        fromTrack.DOFade(0, musicFadeTime).onComplete = fromTrack.Stop;
-        toTrack.DOFade(1, musicFadeTime);
-    }
+            var index = Random.Range(0, _levelClips.Count);
+            var temp = _levelClips[index];
+            _levelClips.RemoveAt(index);
+            if (_lastPlayedClip != null)
+            {
+                _levelClips.Add(_lastPlayedClip);
+            }
+            _lastPlayedClip = temp;
+            return temp.clip;
+        }
 
-    private IEnumerator TriggerFadeOnMusicEnd(float delay)
-    {
-        Debug.Log("Starting Next Fade in: " + delay);
-        yield return new WaitForSeconds(delay - musicFadeTime);
-        PlayDefaultMusic();
-    }
+        private void FadeBetweenTrack(AudioClip clip)
+        {
+            var currentTrack = _tracks[_currentTrackIndex];
+            _currentTrackIndex = (_currentTrackIndex + 1) % _tracks.Count;
+            var nextTrack = _tracks[_currentTrackIndex];
+            nextTrack.clip = clip;
+            FadeMusic(currentTrack, nextTrack);
+        }
+
+        private void FadeMusic(AudioSource fromTrack, AudioSource toTrack)
+        {
+            toTrack.Play();
+            toTrack.volume = 0;
+            fromTrack.DOFade(0, musicFadeTime).onComplete = fromTrack.Stop;
+            toTrack.DOFade(1, musicFadeTime);
+        }
+
+        private IEnumerator TriggerFadeOnMusicEnd(float delay)
+        {
+            Debug.Log("Starting Next Fade in: " + delay);
+            yield return new WaitForSeconds(delay - musicFadeTime);
+            PlayDefaultMusic();
+        }
+
+        public void PlayUIHoverSound()
+        {
+            var sfxName = "UIHover";
+            var clip = GetClipByName(sfxName);
+            if (clip != null)
+                uiAudioSource.PlayOneShot(GetClipByName(sfxName));
+            else
+                Debug.LogException(new Exception($"Could not find track with name: \"{sfxName}\". Please add the clip in the audio list."));
+        }
+        
+         public void PlayUIClickSound()
+         {
+            var sfxName = "UIClick";
+            var clip = GetClipByName(sfxName);
+            if (clip != null)
+                uiAudioSource.PlayOneShot(GetClipByName(sfxName));
+            else
+                Debug.LogException(new Exception($"Could not find track with name: \"{sfxName}\". Please add the clip in the audio list."));
+         }
     }
 }
