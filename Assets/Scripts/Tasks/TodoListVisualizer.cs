@@ -21,7 +21,6 @@ namespace CozyChaosSpring2024
         void Update()
         {
             updateTodoList();
-            
             // print(todos.todos.Keys);
         }
 

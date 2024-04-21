@@ -11,6 +11,8 @@ namespace CozyChaosSpring2024
         public GameObject smallRug;
         public GameObject largeRug;
 
+        public GameObject rugTask;
+
         public TodoListScriptable todoList;
         // Start is called before the first frame update
         void Start()
@@ -23,10 +25,13 @@ namespace CozyChaosSpring2024
         {
             Quaternion smallRotation = smallRug.GetComponent<Transform>().rotation;
             Quaternion largeRotation = largeRug.GetComponent<Transform>().rotation;
-            if (smallRotation == Quaternion.Euler(-90, 0,0) && largeRotation == Quaternion.Euler(-90, 0,0)){
+            if (smallRotation == Quaternion.Euler(-90, 0,0) && largeRotation == Quaternion.Euler(-90, 0,-11)){
                 // print("small rug done");
                 todoList.todos["fix rugs"] = true;
-                SceneManager.LoadScene(0);
+                // GetComponentInParent<Transform>().gameObject.SetActive(false);
+                Camera.main.transform.SetPositionAndRotation(new Vector3(-5, 5 ,7), Quaternion.Euler(18,140,0));
+                rugTask.SetActive(false);
+                // SceneManager.LoadScene(0);
             }
         }
     }
