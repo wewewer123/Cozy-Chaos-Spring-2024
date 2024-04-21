@@ -180,7 +180,13 @@ MonoBehaviour:
   track2: {fileID: 8697214203526137112}
   uiAudioSource: {fileID: 8697214204249062915}
   sfxAudioSource: {fileID: 2103514294164215587}
-  musicAudioClips: []
+  musicAudioClips:
+  - name: MainMenu
+    clip: {fileID: 8300000, guid: 501b5152585434d4ba8dcea2df653e8c, type: 3}
+    type: 0
+  - name: Cozy
+    clip: {fileID: 8300000, guid: de20f513567bdbb4ebbade769448f996, type: 3}
+    type: 1
   sfxAudioClips:
   - name: Door
     clip: {fileID: 8300000, guid: 4cfef2c8013081d4b916ab66f7e18863, type: 3}
@@ -200,6 +206,12 @@ MonoBehaviour:
   - name: Curtains
     clip: {fileID: 8300000, guid: d5610c318e59f3842bfe02fe53a46e60, type: 3}
     type: 2
+  - name: UIHover
+    clip: {fileID: 8300000, guid: 1b0271b585998064797af540127fe9b9, type: 3}
+    type: 2
+  - name: UIClick
+    clip: {fileID: 8300000, guid: 2782e3967a9251e49aa1614eac95bfe2, type: 3}
+    type: 2
   masterMixer: {fileID: 24100000, guid: aebc4ab512f83024586779655dcac837, type: 2}
   musicFadeTime: 5
 --- !u!82 &8697214203526137115
@@ -216,7 +228,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -312,7 +324,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
