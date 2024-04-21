@@ -58,6 +58,21 @@ namespace CozyChaosSpring2024
                         break;
                 }
             }
+            if (SceneManager.GetSceneByName("EndScene") == SceneManager.GetActiveScene())
+            {
+                switch (size)
+                {
+                    case TextSizes.regular:
+                        text.fontSize = 40;
+                        break;
+                    case TextSizes.large:
+                        text.fontSize = 44;
+                        break;
+                    case TextSizes.extraLarge:
+                        text.fontSize = 48;
+                        break;
+                }
+            }
             else
             {
                 switch (size)
