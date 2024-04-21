@@ -23,9 +23,12 @@ namespace CozyChaosSpring2024
         // Update is called once per frame
         void Update()
         {
-            Quaternion smallRotation = smallRug.GetComponent<Transform>().rotation;
-            Quaternion largeRotation = largeRug.GetComponent<Transform>().rotation;
-            if (smallRotation == Quaternion.Euler(-90, 0,0) && largeRotation == Quaternion.Euler(-90, 0,-11)){
+            float smallRotation = smallRug.GetComponent<Transform>().rotation.eulerAngles.y;
+            float largeRotation = largeRug.GetComponent<Transform>().rotation.eulerAngles.y;
+
+            bool smallRotationDone = (smallRotation > -1 && smallRotation < 1 || smallRotation > 179 && smallRotation < 181);
+            bool largeRotationDone = (largeRotation > 168 && largeRotation < 170 || largeRotation > 348 && largeRotation < 350);
+            if (smallRotationDone && largeRotationDone) {
                 // print("small rug done");
                 todoList.todos["fix rugs"] = true;
                 // GetComponentInParent<Transform>().gameObject.SetActive(false);
