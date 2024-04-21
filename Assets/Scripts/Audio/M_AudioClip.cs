@@ -6,7 +6,8 @@ namespace CozyChaosSpring2024
     public enum ClipType
     {
         Menu,
-        Level
+        Level,
+        Sfx
     }
     [Serializable]
     public class M_AudioClip

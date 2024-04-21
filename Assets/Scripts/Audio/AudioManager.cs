@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
-
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace CozyChaosSpring2024
@@ -19,8 +19,10 @@ namespace CozyChaosSpring2024
         [SerializeField] private AudioSource track1;
         [SerializeField] private AudioSource track2;
         [SerializeField] private AudioSource uiAudioSource;
+        [SerializeField] private AudioSource sfxAudioSource;
 
-        [SerializeField] private M_AudioClip[] audioClips;
+        [SerializeField] private M_AudioClip[] musicAudioClips;
+        [SerializeField] private M_AudioClip[] sfxAudioClips;
 
         [SerializeField] private AudioMixer masterMixer;
         [SerializeField] private float musicFadeTime = 5.0f;
@@ -52,9 +54,16 @@ namespace CozyChaosSpring2024
                 track2
             };
             _currentTrackIndex = 0;
+            _nameToClipMapping = new Dictionary<string, M_AudioClip>();
+            MapAudiClips();
             LoadVolumeSettings();
             SplitClips();
             PlayDefaultMusic();
+
+            foreach (var elem in _nameToClipMapping)
+            {
+                Debug.Log($"{elem.Key}");
+            }
         }
 
         private void OnEnable()
@@ -124,10 +133,8 @@ namespace CozyChaosSpring2024
         {
             _menuClips = new List<M_AudioClip>();
             _levelClips = new List<M_AudioClip>();
-            _nameToClipMapping = new Dictionary<string, M_AudioClip>();
-            foreach (var clip in audioClips)
+            foreach (var clip in musicAudioClips)
             {
-                _nameToClipMapping.Add(clip.name, clip);
                 switch (clip.type)
                 {
                     case ClipType.Menu:
@@ -142,9 +149,33 @@ namespace CozyChaosSpring2024
             }
         }
 
-        private AudioClip GetClipByName(string name) =>
-            _nameToClipMapping.ContainsKey(name) ? _nameToClipMapping[name].clip : null;
-        
+        private void MapAudiClips()
+        {
+            foreach (var sfx in sfxAudioClips)
+            {
+                var clipName = sfx.name.Replace(" ", string.Empty).ToLower();
+                _nameToClipMapping.Add(clipName, sfx);
+            }
+
+            foreach (var clip in musicAudioClips)
+            {
+                var clipName = clip.name.Replace(" ", string.Empty).ToLower();
+                _nameToClipMapping.Add(clipName, clip);
+            }
+        }
+
+        private AudioClip GetClipByName(string clipName)
+        {
+            var mClipName = clipName.Replace(" ", string.Empty).ToLower();
+            if (!_nameToClipMapping.ContainsKey(mClipName))
+            {
+                Debug.LogException(new Exception($"Could not find any clip with name: {mClipName}. Please check the spelling or add the clip in AudioManager"));
+                return null;
+            }
+
+            return _nameToClipMapping[mClipName].clip;
+        }
+
         private AudioClip GetRandomLevelClip()
         {
 
@@ -185,7 +216,7 @@ namespace CozyChaosSpring2024
 
         public void PlayUIHoverSound()
         {
-            var sfxName = "UIHover";
+            const string sfxName = "UIHover";
             var clip = GetClipByName(sfxName);
             if (clip != null)
                 uiAudioSource.PlayOneShot(GetClipByName(sfxName));
@@ -195,12 +226,21 @@ namespace CozyChaosSpring2024
         
          public void PlayUIClickSound()
          {
-            var sfxName = "UIClick";
+            const string sfxName = "UIClick";
             var clip = GetClipByName(sfxName);
             if (clip != null)
                 uiAudioSource.PlayOneShot(GetClipByName(sfxName));
             else
                 Debug.LogException(new Exception($"Could not find track with name: \"{sfxName}\". Please add the clip in the audio list."));
+         }
+
+         public void PlayAudioByName(string audioClipName)
+         {
+             var clip = GetClipByName(audioClipName);
+             if (clip != null)
+             {
+                 sfxAudioSource.PlayOneShot(clip);
+             }
          }
     }
 }
