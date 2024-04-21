@@ -158,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 89.42433, y: -376.349}
-  m_SizeDelta: {x: -258.84882, y: -832.698}
+  m_AnchoredPosition: {x: 82.06299, y: -343.7492}
+  m_SizeDelta: {x: -244.1263, y: -767.4984}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &317871704
 MonoBehaviour:
@@ -356,7 +356,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -40, y: 40}
-  m_SizeDelta: {x: 1661.1511, y: 247.1957}
+  m_SizeDelta: {x: 1661.1511, y: 301.8792}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1259272761
 MonoBehaviour:
@@ -378,9 +378,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Scanning the room, you put all problems you see on your mental To-Do list.
-    It will be quite the challenge, but that won't stop you. You won't leave until
-    your room is pretty again. \n[ Click to continue... ]\n"
+  m_text: "Scanning the room, you put all problems you see\non your mental To-Do
+    list. \nIt will be quite the challenge, but that won't stop you.\nYou won't leave
+    until your room is pretty again. \n[ Click to continue... ]\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -414,7 +414,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -682,7 +682,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 40, y: -40}
-  m_SizeDelta: {x: 1770.9629, y: 247.1957}
+  m_SizeDelta: {x: 1579.5417, y: 310.292}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1482177061
 MonoBehaviour:
@@ -704,9 +704,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "As you look around your room, you realize that it is time for spring cleaning.
-    You wanted to be more organized, and starting with you own bedroom seems like
-    a smart idea. Your plants would appreciate the attention as well. \n\n"
+  m_text: "As you look around your room, \nyou realize that it is time for spring
+    cleaning. \nYou wanted to be more organized, \nand starting with your own bedroom
+    seems like a smart idea. \nYour plants would appreciate the attention as well.
+    \n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -769,7 +770,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 179.15955, w: 0}
+  m_margin: {x: 0, y: 0, z: 4.5932617, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1032,8 +1033,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -40.518555, y: 376.34894}
-  m_SizeDelta: {x: -137.03702, y: -832.698}
+  m_AnchoredPosition: {x: -136.48, y: 344.8009}
+  m_SizeDelta: {x: -327.95, y: -769.6017}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2058691627
 MonoBehaviour:
