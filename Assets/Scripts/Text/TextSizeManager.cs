@@ -10,15 +10,15 @@ namespace CozyChaosSpring2024
     {
         public enum TextSizes
         {
-            regular = 20,
-            large = 24,
-            extraLarge = 32
+            regular,
+            large,
+            extraLarge
         }
         public static TextSizes size = TextSizes.regular;
         TextMeshProUGUI text;
         [SerializeField] HorizontalSelector selector;
 
-        private void Start()
+        private void Awake()
         {
             text = GetComponent<TextMeshProUGUI>();
             OnSizeChange();
@@ -32,13 +32,13 @@ namespace CozyChaosSpring2024
             switch (size)
             {
                 case TextSizes.regular:
-                    text.fontSize = 20;
+                    text.fontSize = 30;
                     break;
                 case TextSizes.large:
-                    text.fontSize = 24;
+                    text.fontSize = 34;
                     break;
                 case TextSizes.extraLarge:
-                    text.fontSize = 32;
+                    text.fontSize = 42;
                     break;
             }
             
