@@ -10,6 +10,7 @@ namespace CozyChaosSpring2024
     public class HorizontalSelector : MonoBehaviour
     {
         [SerializeField] private string[] options;
+        public event System.Action onOptionsChange;
         private TextMeshProUGUI _text;
         private int _index;
 
@@ -43,6 +44,9 @@ namespace CozyChaosSpring2024
         private void ApplyChanges()
         {
             _text.text = options[_index];
+            TextSizeManager.size = (TextSizeManager.TextSizes)_index;
+            if (onOptionsChange != null)
+                onOptionsChange();
         }
     }
 }
