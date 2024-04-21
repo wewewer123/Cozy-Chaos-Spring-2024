@@ -99,7 +99,7 @@ namespace CozyChaosSpring2024
                         //SceneManager.LoadScene("Closet Sorting Minigame");
                         //SceneManager.LoadScene(1);
                         Camera.main.transform.SetPositionAndRotation(new Vector3(0, 10 ,0), Quaternion.Euler(0,180,0));
-                        Camera.main.orthographicSize = 7;
+                        // Camera.main.orthographicSize = 7;
                         ClosetTask.SetActive(true);
                     }
                     
