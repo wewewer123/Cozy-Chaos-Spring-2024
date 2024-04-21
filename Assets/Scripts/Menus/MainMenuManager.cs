@@ -41,7 +41,7 @@ namespace CozyChaosSpring2024
 
         public void OnCreditsClicked()
         {
-            
+            SceneManager.LoadScene(4);
         }
 
         public void OnOptionsMenuClosed()
