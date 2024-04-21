@@ -19,13 +19,7 @@ namespace CozyChaosSpring2024
             _defaultSizeDelta = _rectTransform.sizeDelta;
         }
 
-        public void Shrink()
-        {
-            // var scale = 1;
-            // DOTween.To(() => scale, x => scale = x, 0, MainMenuManager.UIElemAnimDuration)
-                // .OnUpdate(() => _rectTransform.localScale = new Vector3(scale, scale, 0));
-            _rectTransform.DOSizeDelta(new Vector2(0, 0), MainMenuManager.UIElemAnimDuration).SetEase(Ease.InElastic);
-        }
+        public void Shrink() => _rectTransform.DOSizeDelta(new Vector2(0, 0), MainMenuManager.UIElemAnimDuration).SetEase(Ease.InElastic);
 
         public void Grow() => _rectTransform.DOSizeDelta(_defaultSizeDelta, MainMenuManager.UIElemAnimDuration).SetEase(Ease.OutElastic);
     }
