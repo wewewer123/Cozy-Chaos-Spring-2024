@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2918632, g: 0.4245283, b: 0, a: 0.46666667}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.9019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -380,7 +380,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Scanning the room, you put all problems you see on your mental To-Do list.
     It will be quite the challenge, but that won't stop you. You won't leave until
-    your room is pretty again. \n\nClick to continue...\n"
+    your room is pretty again. \n[ Click to continue... ]\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnAwake: 0
-  textSpeed: 20
+  textSpeed: 30
   time: -240
 --- !u!1 &1324614124
 GameObject:
@@ -796,7 +796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnAwake: 1
-  textSpeed: 20
+  textSpeed: 30
   time: 0
 --- !u!1 &1612962103
 GameObject:
@@ -1032,7 +1032,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -40.518505, y: 376.34894}
+  m_AnchoredPosition: {x: -40.518555, y: 376.34894}
   m_SizeDelta: {x: -137.03702, y: -832.698}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2058691627
@@ -1048,7 +1048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2918632, g: 0.4245283, b: 0, a: 0.46666667}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.9019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
