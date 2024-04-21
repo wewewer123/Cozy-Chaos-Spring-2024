@@ -7,22 +7,33 @@ namespace CozyChaosSpring2024
     public class MouseDrag : MonoBehaviour
     {
         public float zDistance = 10;
-        public Camera maincamera;
+        Camera maincamera;
+        public event System.Action onDrop;
+        public event System.Action onDrag;
 
         private void Awake(){
-            this.enabled = false;
+            enabled = false;
             maincamera = Camera.main;
         }
 
         private void OnEnable(){
             // get the distance between the object and the camera
             zDistance = Vector3.Distance(maincamera.transform.position, transform.position);
+
+            // When started dragging call onDrag event
+            if (onDrag != null)
+                onDrag();
         }
 
         private void Update(){
             //after dragging the object, turn off this script (stop movment)
             if(Input.GetMouseButtonUp(0)){
-                this.enabled = false;
+                // Call event when dropped
+                if (onDrop != null)
+                    onDrop();
+
+                enabled = false;
+                return;
             }
 
             // get the mouse/ object target position
