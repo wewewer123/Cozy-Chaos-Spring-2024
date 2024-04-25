@@ -1,5 +1,7 @@
+using System.Linq;
 using CozyChaosSpring2024;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -34,7 +36,6 @@ namespace CozyChaosSpring2024
             }
 
             Invoke(nameof(SlideIn), UIElemAnimDuration);
-            return;
         }
 
         private void SlideIn() => optionsPanel.DOAnchorPos(new Vector2(960, 0), OptionsPanelAnimDuration);
@@ -46,13 +47,11 @@ namespace CozyChaosSpring2024
 
         public void OnOptionsMenuClosed()
         {
-            foreach (var uiElem in _uiAnimationsElements)
-            {
-                uiElem.Grow();
-            }
-
-            Invoke(nameof(SlideOut), UIElemAnimDuration);
+            SlideOut();
+            Invoke(nameof(GrowElements), UIElemAnimDuration);
         }
+
+        private void GrowElements() => _uiAnimationsElements.ToList().ForEach(uiElem => uiElem.Grow());
 
         private void SlideOut() => optionsPanel.DOAnchorPos(new Vector2(-1000, 0), OptionsPanelAnimDuration);
     }
