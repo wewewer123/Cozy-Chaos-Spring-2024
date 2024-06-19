@@ -3497,7 +3497,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1442843418
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3538,7 +3538,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press Space to continue
+  m_text: Click anywhere to continue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 199ca0ee1a0cffb4288c9274b1dd2c97, type: 2}
   m_sharedMaterial: {fileID: 2087306299571678530, guid: 199ca0ee1a0cffb4288c9274b1dd2c97, type: 2}
@@ -5669,6 +5669,10 @@ PrefabInstance:
       propertyPath: numberOfSpawns
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 768284384, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
+      propertyPath: instructionPanel
+      value: 
+      objectReference: {fileID: 1442843417}
     - target: {fileID: 8697214203526137093, guid: b56c4268cb02e2243ad89123a2710a22, type: 3}
       propertyPath: m_RootOrder
       value: 4

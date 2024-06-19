@@ -13,7 +13,7 @@ namespace CozyChaosSpring2024
     public class AudioManager : MonoBehaviour
     {
         public static AudioManager i;
-    // public SfxClip[] sfxClips;
+        // public SfxClip[] sfxClips;
 
 
         [SerializeField] private AudioSource track1;
@@ -59,11 +59,6 @@ namespace CozyChaosSpring2024
             LoadVolumeSettings();
             SplitClips();
             PlayDefaultMusic();
-
-            foreach (var elem in _nameToClipMapping)
-            {
-                Debug.Log($"{elem.Key}");
-            }
         }
 
         private void OnEnable()
@@ -80,7 +75,7 @@ namespace CozyChaosSpring2024
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            if(scene != _lastScene)
+            if (scene != _lastScene)
             {
                 if (_currentTriggerCoroutine != null)
                 {
@@ -101,12 +96,14 @@ namespace CozyChaosSpring2024
             masterMixer.SetFloat(VolumeManager.SfxVolumeKey, VolumeManager.ConvertToDecibel(sfxVolume));
         }
 
-        
+
 
         private void PlayDefaultMusic()
         {
             const int mainMenuIndex = 0;
             var index = SceneManager.GetActiveScene().buildIndex;
+            Debug.Log("Scene Count: " + SceneManager.sceneCountInBuildSettings);
+            Debug.Log("Active Scene: " + index);
             if (index == mainMenuIndex)
             {
                 foreach (var track in _tracks)
@@ -116,7 +113,7 @@ namespace CozyChaosSpring2024
                 _tracks[_currentTrackIndex].clip = GetClipByName("MainMenu");
                 _tracks[_currentTrackIndex].Play();
             }
-            else if (index == SceneManager.sceneCount - 1)
+            else if (index == SceneManager.sceneCountInBuildSettings - 1)
             {
                 var clip = GetClipByName("Outro");
                 FadeBetweenTrack(clip);
@@ -178,8 +175,12 @@ namespace CozyChaosSpring2024
 
         private AudioClip GetRandomLevelClip()
         {
-
+            if (_levelClips.Count == 1)
+            {
+                return _levelClips[0].clip;
+            }
             var index = Random.Range(0, _levelClips.Count);
+            Debug.Log("Clip Count: " + _levelClips.Count + " Index: " + index);
             var temp = _levelClips[index];
             _levelClips.RemoveAt(index);
             if (_lastPlayedClip != null)
@@ -223,24 +224,24 @@ namespace CozyChaosSpring2024
             else
                 Debug.LogException(new Exception($"Could not find track with name: \"{sfxName}\". Please add the clip in the audio list."));
         }
-        
-         public void PlayUIClickSound()
-         {
+
+        public void PlayUIClickSound()
+        {
             const string sfxName = "UIClick";
             var clip = GetClipByName(sfxName);
             if (clip != null)
                 uiAudioSource.PlayOneShot(GetClipByName(sfxName));
             else
                 Debug.LogException(new Exception($"Could not find track with name: \"{sfxName}\". Please add the clip in the audio list."));
-         }
+        }
 
-         public void PlayAudioByName(string audioClipName)
-         {
-             var clip = GetClipByName(audioClipName);
-             if (clip != null)
-             {
-                 sfxAudioSource.PlayOneShot(clip);
-             }
-         }
+        public void PlayAudioByName(string audioClipName)
+        {
+            var clip = GetClipByName(audioClipName);
+            if (clip != null)
+            {
+                sfxAudioSource.PlayOneShot(clip);
+            }
+        }
     }
 }
