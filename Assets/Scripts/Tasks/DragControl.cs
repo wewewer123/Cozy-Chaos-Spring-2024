@@ -22,7 +22,7 @@ public class DragControl : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        foreach(float h in relativeHeight)
+        foreach (float h in relativeHeight)
         {
             Gizmos.DrawSphere(transform.parent.position + Vector3.up * h, 0.5f);
         }
@@ -39,44 +39,57 @@ public class DragControl : MonoBehaviour
     void Update()
     {
         //when we click down the mouse, and it hits a game object, start the drag
-        if(Input.GetMouseButtonDown(0)){
+        if (Input.GetMouseButtonDown(0))
+        {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit = new RaycastHit();
-            if(Physics.Raycast(ray, out hit, 1000)){
+            if (Physics.Raycast(ray, out hit, 1000))
+            {
                 //if we have hit an object with the ray
                 MouseDrag mDrag = hit.collider.GetComponent<MouseDrag>();
-                if(mDrag){
+                if (mDrag)
+                {
                     mDrag.enabled = true; // if there is a mouse grag on the object then drag it
                 }
-                else{
+                else
+                {
                     print("I have hit a not draggable object");
                 }
             }
 
         }
-        if (Input.GetMouseButtonUp(0)){
+        if (Input.GetMouseButtonUp(0))
+        {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit = new RaycastHit();
-            if(Physics.Raycast(ray, out hit, 1000)){
+            if (Physics.Raycast(ray, out hit, 1000))
+            {
                 //if we have hit an object with the ray
                 MouseDrag mDrag = hit.collider.GetComponent<MouseDrag>();
-                if(mDrag){
-                    
+                if (mDrag)
+                {
+
                 }
             }
             Invoke(nameof(checkOrder), Time.deltaTime * 2);
         }
     }
 
-    private void checkOrder(){
-        foreach(GameObject shirt in shirts){
-            if (shirt.transform.localPosition.y != relativeHeight[1]){
+    private void checkOrder()
+    {
+        var relativeHeightLocalityDelta = 0.1f; // delta to be considered close enough
+        foreach (GameObject shirt in shirts)
+        {
+            Debug.Log("shirt: " + shirt.transform.localPosition.y);
+            if (Mathf.Abs(shirt.transform.localPosition.y - relativeHeight[1]) > relativeHeightLocalityDelta)
+            {
                 print("Incorrect shirt");
                 return;
             }
         }
-        foreach(GameObject pants in pants){
-            if (pants.transform.localPosition.y != relativeHeight[0])
+        foreach (GameObject pants in pants)
+        {
+            if (Mathf.Abs(pants.transform.localPosition.y - relativeHeight[0]) > relativeHeightLocalityDelta)
             {
                 print("Incorrect pants");
                 return;
