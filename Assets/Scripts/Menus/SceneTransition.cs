@@ -1,10 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
 
 namespace CozyChaosSpring2024
 {
@@ -13,11 +9,10 @@ namespace CozyChaosSpring2024
 
         [SerializeField] private GameObject bgPanel;
         [SerializeField] private GameObject textPanel;
-        [SerializeField] private float textAppearDelay = 2.0f;
-        [SerializeField] private KeyCode skipToGameKey = KeyCode.Space;
+        [SerializeField] private GameObject instructionPanel;
+        [SerializeField] private float textAppearDelay = 1.0f;
 
-
-
+        private bool _canLoadMainGame;
 
         private int nextSceneIndex;
 
@@ -29,21 +24,24 @@ namespace CozyChaosSpring2024
         }
 
         private IEnumerator PlayEffect()
-        { 
-           bgPanel.SetActive(true);
-           yield return new WaitForSeconds(textAppearDelay);
-           textPanel.SetActive(true);
+        {
+            bgPanel.SetActive(true);
+            yield return new WaitForSeconds(textAppearDelay);
+            textPanel.SetActive(true);
+            yield return new WaitForSeconds(textAppearDelay);
+            _canLoadMainGame = true;
+            instructionPanel.SetActive(true);
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(skipToGameKey)) LoadNextScene();
+            if (_canLoadMainGame && Input.GetMouseButtonDown(0)) LoadNextScene();
         }
 
 
         private void LoadNextScene()
         {
-            
+            _canLoadMainGame = false;
             SceneManager.LoadScene(nextSceneIndex);
         }
     }
